@@ -10,13 +10,14 @@ clear
 installsvg(){
     cd /var/www/
     tar -cvf pterodactylbackup.tar.gz pterodactyl
-    echo -e "${CYAN}Installing SVG Icon..."
+    echo -e "${CYAN}Installing SVG Icon Login..."
     cd /var/www/pterodactyl
     rm -r pterodactylsvg
     git clone https://github.com/CatValentine-Dev/pterodactylsvg.git
     cd pterodactylsvg
     rm /var/www/pterodactyl/public/assets/svgs/pterodactyl.svg
-    mv pterodactyl.svg /var/www/pterodactyl/public/assets/svgs/pterodactyl/
+    mv pterodactyl.svg /var/www/pterodactyl/public/assets/svgs/
+    chmod 777 /var/www/pterodactyl/public/assets/svgs/pterodactyl.svg
     cd /var/www/pterodactyl
 
     curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
@@ -33,11 +34,11 @@ installsvg(){
 
 }
 
-instaladordetemas(){
+svglogin(){
     while true; do
-        read -p "Are you sure you want to install the theme [y/n]? " yn
+        read -p "Are you sure you want Change the SVG Login Icon [y/n]? " yn
         case $yn in
-            [Yy]* ) instalartema; break;;
+            [Yy]* ) installsvg; break;;
             [Nn]* ) exit;;
             * ) echo "Please answer yes or no.";;
         esac
@@ -65,7 +66,7 @@ restaurarbackup(){
     echo -e ""
     echo -e "${CYAN}Discord: https://discord.gg/WkVVtTaBRh/"
     echo -e ""
-    echo -e "${CYAN} [1] Install Theme"
+    echo -e "${CYAN} [1] Change SVG Icon Login"
     echo -e "${CYAN} [2] Restore Backup"
     echo -e "${CYAN} [3] Repair Panel (Use if you have a problem installing the themes)"
     echo -e "${CYAN} [4] Exit"
@@ -73,7 +74,7 @@ restaurarbackup(){
 read -p "Enter a number: " choice
 if [ $choice == "1" ]
     then
-    instaladordetemas
+    svglogin
 fi
 if [ $choice == "2" ]
     then
